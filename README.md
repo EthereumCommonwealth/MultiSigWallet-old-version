@@ -1,3 +1,7 @@
+# DEPRECATED!
+
+Please use (https://github.com/gnosis/MultiSigWallet)
+
 Ethereum Multisignature Wallet
 ===================
 
