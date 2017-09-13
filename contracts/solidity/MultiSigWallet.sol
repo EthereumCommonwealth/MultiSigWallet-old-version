@@ -13,6 +13,7 @@ contract MultiSigWallet {
     event Execution(uint indexed transactionId);
     event ExecutionFailure(uint indexed transactionId);
     event Deposit(address indexed sender, uint value);
+    event TokenDeposit(address indexed sender, address indexed token, uint value);
     event OwnerAddition(address indexed owner);
     event OwnerRemoval(address indexed owner);
     event RequirementChange(uint required);
@@ -94,6 +95,13 @@ contract MultiSigWallet {
     {
         if (msg.value > 0)
             Deposit(msg.sender, msg.value);
+    }
+
+    /// @dev ERC223 tokenFallback function allows to deposit ERC223 tokens properly.
+    function tokenFallback(address _from, uint256 _amount, bytes _data)
+    {
+        if (_amount > 0)
+            TokenDeposit(_from, msg.sender, _amount);
     }
 
     /*
